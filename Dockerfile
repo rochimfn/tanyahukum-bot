@@ -8,5 +8,5 @@ COPY . /app
 
 EXPOSE 8501
 
-ENTRYPOINT ["python"]
-CMD ["main.py"]
+ENTRYPOINT ["python", "main.py"]
+CMD ["vps"]
