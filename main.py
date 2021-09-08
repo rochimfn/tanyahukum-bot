@@ -50,9 +50,9 @@ def main():
     dispatcher.add_error_handler(error)
 
     updater.start_webhook(listen="0.0.0.0",
-                          port=int(PORT),
-                          url_path=TOKEN)
-    updater.bot.setWebhook('https://tanyahukumbotsrv.herokuapp.com/' + TOKEN)
+                          port=PORT,
+                          url_path=TOKEN,
+                          webhook_url='https://tanyahukumbotsrv.herokuapp.com/' + TOKEN)
     
     updater.idle()
 
