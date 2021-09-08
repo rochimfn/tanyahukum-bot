@@ -32,7 +32,7 @@ def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 
-def main():
+def main(mode):
     config = setup()
     TOKEN = config['token']
     PORT = config['port']
@@ -49,7 +49,10 @@ def main():
 
     dispatcher.add_error_handler(error)
 
-    updater.start_webhook(listen="0.0.0.0",
+    if mode == 'vps':
+        updater.start_polling()
+    else:
+        updater.start_webhook(listen="0.0.0.0",
                           port=PORT,
                           url_path=TOKEN,
                           webhook_url='https://tanyahukumbotsrv.herokuapp.com/' + TOKEN)
@@ -57,4 +60,8 @@ def main():
     updater.idle()
 
 if __name__ == '__main__':
-    main()
+    try:
+        mode = sys.argv[1]
+    except IndexError:
+        mode = 'heroku'
+    main(mode)
